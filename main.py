@@ -1,11 +1,10 @@
 import logging
 import os
 
-from aiogram.dispatcher import Dispatcher, filters
+from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
-from aiogram import Bot, types
+from aiogram import Bot
 
-from core.buttons import GET_CONTACT
 from nova_bot.settings import dotenv_path, load_dotenv
 
 if os.path.exists(dotenv_path):
@@ -31,11 +30,6 @@ async def on_startup(dispatcher):
 
 async def on_shutdown(dispatcher):
     await bot.delete_webhook()
-
-
-@dp.message_handler(filters.Text(equals=GET_CONTACT), state='*')
-async def send_contact_info(msg: types.Message) -> None:
-    await msg.answer()
 
 
 if __name__ == '__main__':
