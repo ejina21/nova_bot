@@ -16,10 +16,11 @@ class UpdateBot(View):
         return super(UpdateBot, self).dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        if DEBUG:
-            bot.process_telegram_event(json.loads(request.body))
-        else:
-            bot.process_telegram_event.delay(json.loads(request.body))
+        print(json.loads(request.body))
+        # if DEBUG:
+        #     bot.process_telegram_event(json.loads(request.body))
+        # else:
+        #     bot.process_telegram_event.delay(json.loads(request.body))
 
         return JsonResponse({"ok": "POST request processed"})
 
