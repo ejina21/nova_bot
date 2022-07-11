@@ -24,7 +24,7 @@ class UpdateBot(View):
         chat_id = message['chat']['id']
         if message['text'] == '/start':
             name = message['chat']['first_name']
-            self.send_message(chat_id, welcome.foramt(name))
+            self.send_message(chat_id, welcome.format(name))
         elif 'contact' in message:
             username = message['chat']['username']
             phone = message['contact']['phone_number']
