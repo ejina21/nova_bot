@@ -1,7 +1,7 @@
 import json
 
 from core.buttons import start_buttons
-from core.models import Profile
+from core.models import UserProfile
 from core.static_texts import welcome, success, error, already_exist, exist_not_contact
 from nova_bot.settings import TOKEN
 import requests
@@ -21,7 +21,7 @@ def send_welcome(message: json) -> None:
     name = message['chat']['first_name']
     username = message['chat']['username']
     chat_id = message['chat']['id']
-    user, created = Profile.objects.get_or_create(
+    user, created = UserProfile.objects.get_or_create(
         tg_id=chat_id,
         username=username,
     )
@@ -39,7 +39,7 @@ def send_contact_to_api(message: json) -> None:
     phone = message['contact']['phone_number']
     headers = {'Content-Type': 'application/json'}
     data = {'phone': phone, 'login': username}
-    user = Profile.objects.get(tg_id=chat_id)
+    user = UserProfile.objects.get(tg_id=chat_id)
     responce = requests.post('https://s1-nova.ru/app/private_test_python/', headers=headers, json=data)
     if responce.status_code == 200:
         send_message(chat_id, success)

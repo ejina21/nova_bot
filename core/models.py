@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Profile(models.Model):
+class UserProfile(models.Model):
     tg_id = models.PositiveIntegerField(
         verbose_name='ID пользователя',
         primary_key=True,
