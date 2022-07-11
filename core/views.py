@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import requests
 from django.http import HttpResponse
+from aiogram.dispatcher.webhook import SendMessage
 
 from nova_bot.settings import TOKEN
 
@@ -41,7 +42,7 @@ class UpdateBot(View):
         name = responce['message']['chat']['first_name']
         chat_id = responce['message']['chat']['id']
         print(responce)
-        bot.send_message(
+        SendMessage(
             chat_id=chat_id,
             text=f'Привет, {name}, а дай номер',
             reply_markup=start_buttons,
