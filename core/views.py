@@ -42,12 +42,12 @@ class UpdateBot(View):
         name = responce['message']['chat']['first_name']
         chat_id = responce['message']['chat']['id']
         print(responce)
-        SendMessage(
+        return SendMessage(
             chat_id=chat_id,
             text=f'Привет, {name}, а дай номер',
             reply_markup=start_buttons,
         )
-        return JsonResponse({"ok": "POST request processed"})
+        # return JsonResponse({"ok": "POST request processed"})
 
     def get(self, request, *args, **kwargs):  # for debug
         return JsonResponse({"ok": "Get request received! But nothing done"})
