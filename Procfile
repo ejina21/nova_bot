@@ -1,2 +1,2 @@
-bot: python main.py
+worker: python main.py
 web: gunicorn nova_bot.wsgi

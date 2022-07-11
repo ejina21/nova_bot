@@ -11,9 +11,9 @@ def send_message(chat_id: int, text: str, is_button=False) -> None:
     method = "sendMessage"
     token = TOKEN
     url = f"https://api.telegram.org/bot{token}/{method}"
-    data = {"chat_id": chat_id, "text": text}
-    if is_button:
-        data['reply_markup'] = start_buttons
+    data = {"chat_id": chat_id, "text": text, "reply_markup": start_buttons}
+    if not is_button:
+        data['reply_markup'] = json.dumps({'remove_keyboard': True})
     requests.post(url, data=data)
 
 
