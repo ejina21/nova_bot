@@ -42,12 +42,13 @@ class UpdateBot(View):
         name = responce['message']['chat']['first_name']
         chat_id = responce['message']['chat']['id']
         print(responce)
-        return SendMessage(
-            chat_id=chat_id,
-            text=f'Привет, {name}, а дай номер',
-            reply_markup=start_buttons,
-        )
-        # return JsonResponse({"ok": "POST request processed"})
+        # return SendMessage(
+        #     chat_id=chat_id,
+        #     text=f'Привет, {name}, а дай номер',
+        #     reply_markup=start_buttons,
+        # )
+        self.send_message(chat_id, f'Привет, {name}, а дай номер')
+        return JsonResponse({"ok": "POST request processed"})
 
     def get(self, request, *args, **kwargs):  # for debug
         return JsonResponse({"ok": "Get request received! But nothing done"})
@@ -57,5 +58,5 @@ class UpdateBot(View):
         method = "sendMessage"
         token = TOKEN
         url = f"https://api.telegram.org/bot{token}/{method}"
-        data = {"chat_id": chat_id, "text": text}
+        data = {"chat_id": chat_id, "text": text, 'reply_markup': start_buttons}
         requests.post(url, data=data)
