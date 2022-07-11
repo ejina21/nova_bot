@@ -18,8 +18,9 @@ class UpdateBot(View):
     def post(self, request, *args, **kwargs):
         print(json.loads(request.body))
         responce = json.loads(request.body)
-        username = responce['chat']['username']
-        print(username)
+        # username = responce['chat']['username']
+        print(responce)
+        print(type(responce))
         dp.process_update(types.Update(**responce))
         # if DEBUG:
         #     bot.process_telegram_event(json.loads(request.body))
