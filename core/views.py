@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import requests
+from django.http import HttpResponse
 
 from nova_bot.settings import TOKEN
 
@@ -24,7 +25,7 @@ async def index(request):
         text=f'Привет, {name}, а дай номер',
         reply_markup=start_buttons,
     )
-    return JsonResponse({"ok": "POST request processed"})
+    return HttpResponse("POST request processed")
 
 
 class UpdateBot(View):
