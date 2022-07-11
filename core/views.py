@@ -1,13 +1,20 @@
 import json
 
 from django.views import View
-from main import bot, types
+from main import bot
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from nova_bot.settings import DEBUG
 
 
 class UpdateBot(View):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(UpdateBot, self).dispatch(*args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         if DEBUG:
             bot.process_telegram_event(json.loads(request.body))
