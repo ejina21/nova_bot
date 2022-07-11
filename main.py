@@ -4,6 +4,7 @@ import os
 from aiogram.dispatcher import Dispatcher, filters
 from aiogram.utils.executor import start_webhook
 from aiogram import Bot, types
+from aiogram.dispatcher.webhook import SendMessage
 
 from core.buttons import start_buttons, GET_CONTACT
 from nova_bot.settings import dotenv_path, load_dotenv
@@ -39,6 +40,7 @@ async def on_shutdown(dispatcher):
 @dp.message_handler(state='*', commands=['start'])
 async def send_welcome(msg: types.Message) -> None:
     logging.warning(f'Recieved a message from {msg.from_user}')
+    # return SendMessage(msg.chat.id, msg.text)
     await msg.answer(
         f'Привет, {msg.from_user.first_name}, а дай номер',
         reply_markup=start_buttons,

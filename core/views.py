@@ -19,9 +19,10 @@ class UpdateBot(View):
     def post(self, request, *args, **kwargs):
         print(json.loads(request.body))
         responce = json.loads(request.body)
-        # username = responce['chat']['username']
+        username = responce['message']['chat']['username']
+        chat_id = responce['message']['chat']['id']
         print(responce)
-        # self.send_message()
+        self.send_message(chat_id, 'Hello')
         return JsonResponse({"ok": "POST request processed"})
 
     def get(self, request, *args, **kwargs):  # for debug
