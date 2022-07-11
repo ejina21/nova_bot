@@ -21,7 +21,7 @@ class UpdateBot(View):
         # username = responce['chat']['username']
         print(responce)
         print(type(responce))
-        dp.process_update(types.Update(**responce))
+        await dp.process_update(types.Update(**responce))
         # if DEBUG:
         #     bot.process_telegram_event(json.loads(request.body))
         # else:
