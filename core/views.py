@@ -22,7 +22,7 @@ class UpdateBot(View):
         responce = json.loads(request.body)
         message = responce['message']
         chat_id = message['chat']['id']
-        if message['text'] == '/start':
+        if 'text' in message and message['text'] == '/start':
             name = message['chat']['first_name']
             self.send_message(chat_id, welcome.format(name))
         elif 'contact' in message:
