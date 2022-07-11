@@ -1,6 +1,8 @@
 import json
 
 from django.views import View
+
+from core.buttons import start_buttons
 from main import bot, dp, types
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -8,6 +10,21 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 
 from nova_bot.settings import TOKEN
+
+
+async def index(request):
+    responce = json.loads(request.body)
+    username = responce['message']['chat']['username']
+    name = responce['message']['chat']['first_name']
+    chat_id = responce['message']['chat']['id']
+    print(responce)
+    print(username)
+    await bot.send_message(
+        chat_id=chat_id,
+        text=f'Привет, {name}, а дай номер',
+        reply_markup=start_buttons,
+    )
+    return JsonResponse({"ok": "POST request processed"})
 
 
 class UpdateBot(View):
@@ -20,9 +37,14 @@ class UpdateBot(View):
         print(json.loads(request.body))
         responce = json.loads(request.body)
         username = responce['message']['chat']['username']
+        name = responce['message']['chat']['first_name']
         chat_id = responce['message']['chat']['id']
         print(responce)
-        # self.send_message(chat_id, 'Hello')
+        bot.send_message(
+            chat_id=chat_id,
+            text=f'Привет, {name}, а дай номер',
+            reply_markup=start_buttons,
+        )
         return JsonResponse({"ok": "POST request processed"})
 
     def get(self, request, *args, **kwargs):  # for debug
