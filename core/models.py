@@ -11,6 +11,10 @@ class Profile(models.Model):
         verbose_name='Логин пользователя',
         unique=True,
     )
+    is_get_contact = models.BooleanField(
+        verbose_name='Оставил контакт',
+        default=False,
+    )
 
     class Meta:
         verbose_name = 'Профиль'
