@@ -38,6 +38,7 @@ async def on_shutdown(dispatcher):
 
 @dp.message_handler(state='*', commands=['start'])
 async def send_welcome(msg: types.Message) -> None:
+    logging.warning(f'Recieved a message from {msg.from_user}')
     await msg.answer(
         f'Привет, {msg.from_user.first_name}, а дай номер',
         reply_markup=start_buttons,
