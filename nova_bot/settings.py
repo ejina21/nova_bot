@@ -31,7 +31,7 @@ TOKEN = os.environ.get('TOKEN')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['my-nova.herokuapp.com']
 
 
 # Application definition
